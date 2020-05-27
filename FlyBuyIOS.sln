@@ -1,0 +1,31 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyBuySDK", "FlyBuySDK\FlyBuySDK.csproj", "{BECB65E9-7DAA-475B-B16A-4DACED4D1147}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54CF84ED-0C28-46BF-AE8F-111ECA97F5A0}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{54CF84ED-0C28-46BF-AE8F-111ECA97F5A0}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{54CF84ED-0C28-46BF-AE8F-111ECA97F5A0}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{54CF84ED-0C28-46BF-AE8F-111ECA97F5A0}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{54CF84ED-0C28-46BF-AE8F-111ECA97F5A0}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{54CF84ED-0C28-46BF-AE8F-111ECA97F5A0}.Debug|iPhone.Build.0 = Debug|iPhone
+		{54CF84ED-0C28-46BF-AE8F-111ECA97F5A0}.Release|iPhone.ActiveCfg = Release|iPhone
+		{54CF84ED-0C28-46BF-AE8F-111ECA97F5A0}.Release|iPhone.Build.0 = Release|iPhone
+		{BECB65E9-7DAA-475B-B16A-4DACED4D1147}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{BECB65E9-7DAA-475B-B16A-4DACED4D1147}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{BECB65E9-7DAA-475B-B16A-4DACED4D1147}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{BECB65E9-7DAA-475B-B16A-4DACED4D1147}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{BECB65E9-7DAA-475B-B16A-4DACED4D1147}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{BECB65E9-7DAA-475B-B16A-4DACED4D1147}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{BECB65E9-7DAA-475B-B16A-4DACED4D1147}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{BECB65E9-7DAA-475B-B16A-4DACED4D1147}.Release|iPhone.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
