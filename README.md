@@ -1,5 +1,4 @@
 # FlyBuy SDK for Xamarin.iOS
-Last updated 26-May-2020
 
 ### Nuget
 
