@@ -13,9 +13,9 @@
     <AssemblyName>NativeLibrary</AssemblyName>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>Radiusnetworks.Flybuy.IOS</PackageId>
-    <PackageVersion>1.1.4</PackageVersion>
+    <PackageVersion>1.6</PackageVersion>
     <Authors>Radius Networks, Inc</Authors>
-    <Description>FlyBuy Pickup SDK for Xamarin/iOS built for iOS 13.</Description>
+    <Description>FlyBuy Pickup SDK for Xamarin/iOS.</Description>
     <Copyright>Copyright (c) 2020 by Radius Networks</Copyright>
     <PackageIconUrl>https://www.radiusnetworks.com/wp-content/uploads/FlyBuyPickup_logo.svg</PackageIconUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
