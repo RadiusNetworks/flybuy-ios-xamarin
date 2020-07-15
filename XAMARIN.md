@@ -8,16 +8,15 @@
 
 1. Install Objective Sharpie
 
-1. Change directory to the directory containing `FlyBuy.framework`, preferably a copy outside of the Xamarin project directory.
-
-1. Run the following sharpie command:
+1. Start from the project root directory, the use the following command to find the current iOS SDK version installed.
     ```
-    $ sharpie bind --output=FlyBuySDK --namespace=FlyBuy --sdk=iphoneos12.2 ./FlyBuy.framework/Headers/FlyBuy-Swift.h -scope ./FlyBuy.framework/Headers
+    $ sharpie xcode -sdks
     ```
 
-1. Copy the generated files `ApiDefinitions.cs` and `StructsAndEnums.cs` into the binding library’s directory to replace the default `ApiDefinition.cs` and `Structs.cs` files.
-
-1. In `Structs.cs`, change `nint` to `long`.
+1. Run the following sharpie command (using current SDK version):
+    ```
+    $ sharpie bind --output=FlyBuySDK --namespace=FlyBuy -sdk=iphoneos13.5 FlyBuySDK/FlyBuy.framework/Headers/FlyBuy-Swift.h -scope FlyBuySDK/FlyBuy.framework/Headers
+    ```
 
 1. In `ApiDefinition.cs`, delete the "verify" build errors related to `MethodToProperty`.
 
