@@ -6,9 +6,8 @@ using ObjCRuntime;
 
 namespace FlyBuy
 {
-
-	// @interface ClaimOrderInfo : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy14ClaimOrderInfo")]
+    // @interface ClaimOrderInfo : NSObject
+    [BaseType (typeof(NSObject), Name = "_TtC6FlyBuy14ClaimOrderInfo")]
 	[DisableDefaultCtor]
 	interface ClaimOrderInfo
 	{
@@ -42,10 +41,10 @@ namespace FlyBuy
 		IntPtr Constructor (NSEntityDescription entity, [NullAllowed] NSManagedObjectContext context);
 	}
 
-	// @interface FlyBuy_Swift_240 (CoreOrder)
+	// @interface FlyBuy_Swift_242 (CoreOrder)
 	[Category]
 	[BaseType (typeof(CoreOrder))]
-	interface CoreOrder_FlyBuy_Swift_240
+	interface CoreOrder_FlyBuy_Swift_242
 	{
 		// @property (nonatomic) int64_t customerState;
 		[Export("customerState")]
@@ -257,6 +256,11 @@ namespace FlyBuy
 		[Static]
 		[Export ("updatePushToken:")]
 		void UpdatePushToken (string newPushToken);
+
+		// +(void)updateAPNPushToken:(NSData * _Nonnull)deviceToken;
+		[Static]
+		[Export ("updateAPNPushToken:")]
+		void UpdateAPNPushToken (NSData deviceToken);
 	}
 
 	// @interface LoginInfo : NSObject
