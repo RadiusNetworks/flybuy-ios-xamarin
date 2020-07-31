@@ -13,7 +13,7 @@
     <AssemblyName>NativeLibrary</AssemblyName>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>Radiusnetworks.Flybuy.IOS</PackageId>
-    <PackageVersion>1.6</PackageVersion>
+    <PackageVersion>1.9</PackageVersion>
     <Authors>Radius Networks, Inc</Authors>
     <Description>FlyBuy Pickup SDK for Xamarin/iOS.</Description>
     <Copyright>Copyright (c) 2020 by Radius Networks</Copyright>
@@ -22,7 +22,9 @@
     <PackageLicenseUrl>https://github.com/RadiusNetworks/flybuy-ios/blob/master/LICENSE</PackageLicenseUrl>
     <Owners>Radius Networks, Inc</Owners>
     <PackageProjectUrl>https://www.radiusnetworks.com/flybuy</PackageProjectUrl>
-    <PackageReleaseNotes>FlyBuy Pickup SDK. Contains SDK for iOS 13.</PackageReleaseNotes>
+    <PackageReleaseNotes>* Sets the push token on orders that were created and assigned to a customer on the back-end, once they are fetched by the SDK.
+* Update minimum required iOS version to 11.0
+* When sending a state or customer_state event, the SDK will now immediately update the cached copy of the order with that state change so that the app doesn't need to wait to be updated by data contained in a push notification.</PackageReleaseNotes>
     <Title>FlyBuy Pickup SDK</Title>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
