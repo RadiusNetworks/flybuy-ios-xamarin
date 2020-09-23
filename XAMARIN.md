@@ -15,7 +15,7 @@
 
 1. Run the following sharpie command (using current SDK version):
     ```
-    $ sharpie bind --output=FlyBuySDK --namespace=FlyBuy -sdk=iphoneos13.5 FlyBuySDK/FlyBuy.framework/Headers/FlyBuy-Swift.h -scope FlyBuySDK/FlyBuy.framework/Headers
+    % sharpie bind --output=FlyBuySDK --namespace=FlyBuy -sdk=iphoneos14.0 FlyBuySDK/FlyBuySDK.framework/Headers/FlyBuySDK-Swift.h -scope FlyBuySDK/FlyBuySDK.framework/Headers
     ```
 
 1. In `ApiDefinition.cs`, delete the "verify" build errors related to `MethodToProperty`.
