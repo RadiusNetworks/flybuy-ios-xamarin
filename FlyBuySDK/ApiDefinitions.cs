@@ -7,7 +7,7 @@ using ObjCRuntime;
 namespace FlyBuy
 {
 	// @interface ClaimOrderInfo : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy14ClaimOrderInfo")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK14ClaimOrderInfo")]
 	[DisableDefaultCtor]
 	interface ClaimOrderInfo
 	{
@@ -23,7 +23,7 @@ namespace FlyBuy
 	}
 
 	// @interface ConfigurationManager : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy20ConfigurationManager")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK20ConfigurationManager")]
 	interface ConfigurationManager
 	{
 		// -(void)fetchWithCallback:(void (^ _Nullable)(NSDictionary<NSString *,id> * _Nullable, NSError * _Nullable))callback;
@@ -32,7 +32,7 @@ namespace FlyBuy
 	}
 
 	// @interface CoreOrder : NSManagedObject
-	[BaseType (typeof(NSManagedObject), Name = "_TtC6FlyBuy9CoreOrder")]
+	[BaseType (typeof(NSManagedObject), Name = "_TtC9FlyBuySDK9CoreOrder")]
 	interface CoreOrder
 	{
 		// -(instancetype _Nonnull)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context __attribute__((objc_designated_initializer));
@@ -41,10 +41,10 @@ namespace FlyBuy
 		IntPtr Constructor (NSEntityDescription entity, [NullAllowed] NSManagedObjectContext context);
 	}
 
-	// @interface FlyBuy_Swift_240 (CoreOrder)
+	// @interface FlyBuySDK_Swift_240 (CoreOrder)
 	[Category]
 	[BaseType (typeof(CoreOrder))]
-	interface CoreOrder_FlyBuy_Swift_240
+	interface CoreOrder_FlyBuySDK_Swift_240
 	{
 		// @property (nonatomic) int64_t customerState;
 		[Export("customerState")]
@@ -83,7 +83,7 @@ namespace FlyBuy
 	}
 
 	// @interface CreateOrderInfo : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy15CreateOrderInfo")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK15CreateOrderInfo")]
 	[DisableDefaultCtor]
 	interface CreateOrderInfo
 	{
@@ -99,7 +99,7 @@ namespace FlyBuy
 	}
 
 	// @interface Customer : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy8Customer")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK8Customer")]
 	[DisableDefaultCtor]
 	interface Customer
 	{
@@ -121,7 +121,7 @@ namespace FlyBuy
 	}
 
 	// @interface CustomerConsent : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy15CustomerConsent")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK15CustomerConsent")]
 	[DisableDefaultCtor]
 	interface CustomerConsent
 	{
@@ -140,7 +140,7 @@ namespace FlyBuy
 	}
 
 	// @interface CustomerInfo : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy12CustomerInfo")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK12CustomerInfo")]
 	[DisableDefaultCtor]
 	interface CustomerInfo
 	{
@@ -171,7 +171,7 @@ namespace FlyBuy
 	}
 
 	// @interface CustomerManager : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy15CustomerManager")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK15CustomerManager")]
 	[DisableDefaultCtor]
 	interface CustomerManager
 	{
@@ -203,6 +203,14 @@ namespace FlyBuy
 		[Export ("signUpWithEmailAddress:password:callback:")]
 		void SignUpWithEmailAddress (string emailAddress, string password, [NullAllowed] Action<Customer, NSError> callback);
 
+		// -(void)requestNewPasswordWithEmailAddress:(NSString * _Nonnull)emailAddress callback:(void (^ _Nullable)(NSError * _Nullable))callback;
+		[Export ("requestNewPasswordWithEmailAddress:callback:")]
+		void RequestNewPasswordWithEmailAddress (string emailAddress, [NullAllowed] Action<NSError> callback);
+
+		// -(void)setNewPasswordWithResetPasswordToken:(NSString * _Nonnull)resetPasswordToken password:(NSString * _Nonnull)password confrimation:(NSString * _Nonnull)confrimation callback:(void (^ _Nullable)(Customer * _Nullable, NSError * _Nullable))callback;
+		[Export ("setNewPasswordWithResetPasswordToken:password:confrimation:callback:")]
+		void SetNewPasswordWithResetPasswordToken (string resetPasswordToken, string password, string confrimation, [NullAllowed] Action<Customer, NSError> callback);
+
 		// -(void)logout;
 		[Export ("logout")]
 		void Logout ();
@@ -213,7 +221,7 @@ namespace FlyBuy
 	}
 
 	// @interface FlyBuy : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy6FlyBuy")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK6FlyBuy")]
 	[DisableDefaultCtor]
 	interface FlyBuy
 	{
@@ -264,7 +272,7 @@ namespace FlyBuy
 	}
 
 	// @interface LoginInfo : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy9LoginInfo")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK9LoginInfo")]
 	[DisableDefaultCtor]
 	interface LoginInfo
 	{
@@ -283,7 +291,7 @@ namespace FlyBuy
 	}
 
 	// @interface Order : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy5Order")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK5Order")]
 	interface Order : INativeObject
 	{
 		// @property (readonly, nonatomic) NSInteger id;
@@ -434,13 +442,36 @@ namespace FlyBuy
 		[NullAllowed, Export ("customerLicensePlate")]
 		string CustomerLicensePlate { get; }
 
+		// @property (readonly, nonatomic) BOOL projectMobileFlowAlwaysShowVehicleInfoFields;
+		[Export ("projectMobileFlowAlwaysShowVehicleInfoFields")]
+		bool ProjectMobileFlowAlwaysShowVehicleInfoFields { get; }
+
+		// @property (readonly, nonatomic) BOOL projectMobileFlowCustomerNameEditingEnabled;
+		[Export ("projectMobileFlowCustomerNameEditingEnabled")]
+		bool ProjectMobileFlowCustomerNameEditingEnabled { get; }
+
+		// @property (readonly, nonatomic) BOOL projectMobileFlowPickupTypeSelectionEnabled;
+		[Export ("projectMobileFlowPickupTypeSelectionEnabled")]
+		bool ProjectMobileFlowPickupTypeSelectionEnabled { get; }
+
+		// @property (readonly, nonatomic) BOOL projectMobileFlowRequireVehicleInfoIfVisible;
+		[Export ("projectMobileFlowRequireVehicleInfoIfVisible")]
+		bool ProjectMobileFlowRequireVehicleInfoIfVisible { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable curbsideLocalizedString;
+		[NullAllowed, Export ("curbsideLocalizedString")]
+		string CurbsideLocalizedString { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable pickupLocalizedString;
+		[NullAllowed, Export ("pickupLocalizedString")]
+		string PickupLocalizedString { get; }
+
 		// @property (copy, nonatomic) NSString * _Nullable pushToken;
 		[NullAllowed, Export ("pushToken")]
 		string PushToken { get; set; }
 
 		// -(CLLocation * _Nullable)siteLocation __attribute__((warn_unused_result));
-		[NullAllowed, Export ("siteLocation")]
-		CLLocation SiteLocation { get; }
+		[NullAllowed, Export ("siteLocation")]		CLLocation SiteLocation { get; }
 
 		// -(NSNumber * _Nullable)siteDistanceFrom:(CLLocation * _Nonnull)location __attribute__((warn_unused_result));
 		[Export ("siteDistanceFrom:")]
@@ -453,7 +484,7 @@ namespace FlyBuy
 	}
 
 	// @interface OrderEvent : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy10OrderEvent")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK10OrderEvent")]
 	[DisableDefaultCtor]
 	interface OrderEvent
 	{
@@ -479,7 +510,7 @@ namespace FlyBuy
 	}
 
 	// @interface OrdersManager : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy13OrdersManager")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK13OrdersManager")]
 	interface OrdersManager
 	{
 		// @property (readonly, copy, nonatomic) NSArray<Order *> * _Nullable all;
@@ -544,7 +575,7 @@ namespace FlyBuy
 	}
 
 	// @interface Pagination : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy10Pagination")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK10Pagination")]
 	[DisableDefaultCtor]
 	interface Pagination
 	{
@@ -558,7 +589,7 @@ namespace FlyBuy
 	}
 
 	// @interface PickupWindow : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy12PickupWindow")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK12PickupWindow")]
 	[DisableDefaultCtor]
 	interface PickupWindow
 	{
@@ -580,8 +611,26 @@ namespace FlyBuy
 		IntPtr Constructor (NSDate date);
 	}
 
+	// @interface RequestPasswordReset : NSObject
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK20RequestPasswordReset")]
+	[DisableDefaultCtor]
+	interface RequestPasswordReset
+	{
+	}
+
+	// @interface SetNewPassword : NSObject
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK14SetNewPassword")]
+	[DisableDefaultCtor]
+	interface SetNewPassword
+	{
+		// -(instancetype _Nonnull)initWithResetPasswordToken:(NSString * _Nonnull)resetPasswordToken password:(NSString * _Nonnull)password confirmation:(NSString * _Nonnull)confirmation __attribute__((objc_designated_initializer));
+		[Export ("initWithResetPasswordToken:password:confirmation:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (string resetPasswordToken, string password, string confirmation);
+	}
+
 	// @interface SignUpInfo : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy10SignUpInfo")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK10SignUpInfo")]
 	[DisableDefaultCtor]
 	interface SignUpInfo
 	{
@@ -604,7 +653,7 @@ namespace FlyBuy
 	}
 
 	// @interface Site : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy4Site")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK4Site")]
 	interface Site : INativeObject
 	{
 		// @property (readonly, nonatomic) NSInteger id;
@@ -690,7 +739,7 @@ namespace FlyBuy
 	}
 
 	// @interface SitesManager : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy12SitesManager")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK12SitesManager")]
 	interface SitesManager
 	{
 		// @property (readonly, copy, nonatomic) NSArray<Site *> * _Nullable all;
@@ -707,7 +756,7 @@ namespace FlyBuy
 	}
 
 	// @interface UpdateOrderInfo : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy15UpdateOrderInfo")]
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK15UpdateOrderInfo")]
 	[DisableDefaultCtor]
 	interface UpdateOrderInfo
 	{
