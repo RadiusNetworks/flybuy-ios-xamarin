@@ -41,20 +41,20 @@ namespace FlyBuy
 		IntPtr Constructor (NSEntityDescription entity, [NullAllowed] NSManagedObjectContext context);
 	}
 
-	// @interface FlyBuySDK_Swift_240 (CoreOrder)
+	// @interface FlyBuySDK_Swift_242 (CoreOrder)
 	[Category]
 	[BaseType (typeof(CoreOrder))]
-	interface CoreOrder_FlyBuySDK_Swift_240
+	interface CoreOrder_FlyBuySDK_Swift_242
 	{
 		// @property (nonatomic) int64_t customerState;
-		[Export("customerState")]
+		[Export ("customerState")]
 		long Get_CustomerState();
 
 		[Export("setCustomerState:")]
 		void Set_CustomerState(long value);
 
 		// @property (nonatomic) int64_t id;
-		[Export("id")]
+		[Export ("id")]
 		long Get_Id();
 
 		[Export("setId:")]
@@ -68,14 +68,14 @@ namespace FlyBuy
 		void Set_PartnerIdentifier(string value);
 
 		// @property (nonatomic) int64_t siteId;
-		[Export("siteId")]
+		[Export ("siteId")]
 		long Get_SiteId();
 
 		[Export("setSiteId:")]
 		void Set_SiteId(long value);
 
 		// @property (nonatomic) int64_t state;
-		[Export("state")]
+		[Export ("state")]
 		long Get_State();
 
 		[Export("setState:")]
@@ -245,6 +245,11 @@ namespace FlyBuy
 		[Export ("config", ArgumentSemantic.Strong)]
 		ConfigurationManager Config { get; }
 
+		// @property (readonly, nonatomic, strong, class) NotifyManager * _Nonnull notify;
+		[Static]
+		[Export ("notify", ArgumentSemantic.Strong)]
+		NotifyManager Notify { get; }
+
 		// +(void)configure:(NSDictionary<NSString *,id> * _Nonnull)opts;
 		[Static]
 		[Export ("configure:")]
@@ -271,6 +276,23 @@ namespace FlyBuy
 		void UpdateAPNPushToken (NSData deviceToken);
 	}
 
+	// @interface Geofence : NSObject
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK8Geofence")]
+	interface Geofence
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull latitude;
+		[Export ("latitude")]
+		string Latitude { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull longitude;
+		[Export ("longitude")]
+		string Longitude { get; }
+
+		// @property (readonly, nonatomic) double radiusMeters;
+		[Export ("radiusMeters")]
+		double RadiusMeters { get; }
+	}
+
 	// @interface LoginInfo : NSObject
 	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK9LoginInfo")]
 	[DisableDefaultCtor]
@@ -288,6 +310,45 @@ namespace FlyBuy
 		[Export ("initWithEmailAddress:password:")]
 		[DesignatedInitializer]
 		IntPtr Constructor (string emailAddress, string password);
+	}
+
+	// @interface NotificationInfo : NSObject
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK16NotificationInfo")]
+	[DisableDefaultCtor]
+	interface NotificationInfo
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull title;
+		[Export ("title")]
+		string Title { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull content;
+		[Export ("content")]
+		string Content { get; }
+
+		// @property (readonly, copy, nonatomic) NSDictionary * _Nullable data;
+		[NullAllowed, Export ("data", ArgumentSemantic.Copy)]
+		NSDictionary Data { get; }
+	}
+
+	// @interface NotifyManager : NSObject
+	[BaseType (typeof(NSObject), Name = "_TtC9FlyBuySDK13NotifyManager")]
+	interface NotifyManager
+	{
+		// -(void)createForSitesInRegion:(CLCircularRegion * _Nonnull)region notification:(NotificationInfo * _Nonnull)notification callback:(void (^ _Nonnull)(NSArray<Site *> * _Nullable, NSError * _Nullable))callback;
+		[Export ("createForSitesInRegion:notification:callback:")]
+		void CreateForSitesInRegion (CLCircularRegion region, NotificationInfo notification, Action<NSArray<Site>, NSError> callback);
+
+		// -(void)createForSites:(NSArray<Site *> * _Nonnull)sites notification:(NotificationInfo * _Nonnull)notification callback:(void (^ _Nonnull)(NSError * _Nullable))callback;
+		[Export ("createForSites:notification:callback:")]
+		void CreateForSites (Site[] sites, NotificationInfo notification, Action<NSError> callback);
+
+		// -(void)clearWithCallback:(void (^ _Nonnull)(NSError * _Nullable))callback;
+		[Export ("clearWithCallback:")]
+		void ClearWithCallback (Action<NSError> callback);
+
+		// -(BOOL)isFlyBuyNotifyUserInfo:(NSDictionary * _Nonnull)userInfo __attribute__((warn_unused_result));
+		[Export ("isFlyBuyNotifyUserInfo:")]
+		bool IsFlyBuyNotifyUserInfo (NSDictionary userInfo);
 	}
 
 	// @interface Order : NSObject
@@ -471,7 +532,8 @@ namespace FlyBuy
 		string PushToken { get; set; }
 
 		// -(CLLocation * _Nullable)siteLocation __attribute__((warn_unused_result));
-		[NullAllowed, Export ("siteLocation")]		CLLocation SiteLocation { get; }
+		[NullAllowed, Export ("siteLocation")]
+		CLLocation SiteLocation { get; }
 
 		// -(NSNumber * _Nullable)siteDistanceFrom:(CLLocation * _Nonnull)location __attribute__((warn_unused_result));
 		[Export ("siteDistanceFrom:")]
@@ -728,6 +790,10 @@ namespace FlyBuy
 		[NullAllowed, Export ("projectLogoURL")]
 		string ProjectLogoURL { get; }
 
+		// @property (readonly, nonatomic, strong) Geofence * _Nullable geofence;
+		[NullAllowed, Export ("geofence", ArgumentSemantic.Strong)]
+		Geofence Geofence { get; }
+
 		// -(CLLocation * _Nullable)location __attribute__((warn_unused_result));
 		[NullAllowed, Export ("location")]
 		CLLocation Location { get; }
@@ -749,6 +815,14 @@ namespace FlyBuy
 		// -(void)fetchWithQuery:(NSString * _Nullable)query page:(NSInteger)page callback:(void (^ _Nullable)(NSArray<Site *> * _Nullable, Pagination * _Nullable, NSError * _Nullable))callback;
 		[Export ("fetchWithQuery:page:callback:")]
 		void FetchWithQuery ([NullAllowed] string query, nint page, [NullAllowed] Action<NSArray<Site>, Pagination, NSError> callback);
+
+		// -(void)fetchWithRegion:(CLCircularRegion * _Nonnull)region page:(NSInteger)page callback:(void (^ _Nullable)(NSArray<Site *> * _Nullable, NSError * _Nullable))callback;
+		[Export ("fetchWithRegion:page:callback:")]
+		void FetchWithRegion (CLCircularRegion region, nint page, [NullAllowed] Action<NSArray<Site>, NSError> callback);
+
+		// -(void)fetchWithRegion:(CLCircularRegion * _Nonnull)region page:(NSInteger)page per:(NSInteger)per callback:(void (^ _Nullable)(NSArray<Site *> * _Nullable, NSError * _Nullable))callback;
+		[Export ("fetchWithRegion:page:per:callback:")]
+		void FetchWithRegion (CLCircularRegion region, nint page, nint per, [NullAllowed] Action<NSArray<Site>, NSError> callback);
 
 		// -(void)fetchAllWithQuery:(NSString * _Nullable)query callback:(void (^ _Nullable)(NSArray<Site *> * _Nullable, NSError * _Nullable))callback;
 		[Export ("fetchAllWithQuery:callback:")]
