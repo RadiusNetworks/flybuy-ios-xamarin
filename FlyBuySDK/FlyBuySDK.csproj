@@ -16,17 +16,15 @@
     <PackageVersion>2.1.2</PackageVersion>
     <Authors>Radius Networks, Inc</Authors>
     <Description>FlyBuy Pickup SDK for Xamarin/iOS.</Description>
-    <Copyright>Copyright (c) 2020 by Radius Networks</Copyright>
+    <Copyright>Copyright (c) 2021 by Radius Networks</Copyright>
     <PackageIconUrl>https://www.radiusnetworks.com/wp-content/uploads/FlyBuyPickup_logo.svg</PackageIconUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseUrl>https://github.com/RadiusNetworks/flybuy-ios/blob/master/LICENSE</PackageLicenseUrl>
     <Owners>Radius Networks, Inc</Owners>
     <PackageProjectUrl>https://www.radiusnetworks.com/flybuy</PackageProjectUrl>
-    <PackageReleaseNotes>Enhancements:
- * Improved ABI Support
- * Support for Xcode 12
- * Compatibility for the Swift 5.3 compiler</PackageReleaseNotes>
-    <Title>FlyBuy Pickup SDK</Title>
+    <PackageReleaseNotes>Bug Fixes:
+ * Fixes a deadlock issue that can occur when upgrading from an older SDK version</PackageReleaseNotes>
+    <Title>FlyBuy 2.0 SDK</Title>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
