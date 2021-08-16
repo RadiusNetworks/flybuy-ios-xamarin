@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyBuyNotify", "FlyBuyNotif
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyBuyPresence", "FlyBuyPresence\FlyBuyPresence.csproj", "{48784CB4-2DC9-4334-8DE8-2447C293A340}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyBuySDK", "FlyBuySDK\FlyBuySDK.csproj", "{38B12DEA-87A6-495D-B933-C6BBB259BCF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -57,5 +59,13 @@ Global
 		{48784CB4-2DC9-4334-8DE8-2447C293A340}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{48784CB4-2DC9-4334-8DE8-2447C293A340}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{48784CB4-2DC9-4334-8DE8-2447C293A340}.Release|iPhone.Build.0 = Release|Any CPU
+		{38B12DEA-87A6-495D-B933-C6BBB259BCF9}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{38B12DEA-87A6-495D-B933-C6BBB259BCF9}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{38B12DEA-87A6-495D-B933-C6BBB259BCF9}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{38B12DEA-87A6-495D-B933-C6BBB259BCF9}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{38B12DEA-87A6-495D-B933-C6BBB259BCF9}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{38B12DEA-87A6-495D-B933-C6BBB259BCF9}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{38B12DEA-87A6-495D-B933-C6BBB259BCF9}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{38B12DEA-87A6-495D-B933-C6BBB259BCF9}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
