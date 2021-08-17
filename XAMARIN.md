@@ -13,14 +13,22 @@
     $ sharpie xcode -sdks
     ```
 
-1. Run the following sharpie command (using current SDK version):
-    ```
-    % sharpie bind --output=FlyBuySDK --namespace=FlyBuy -sdk=iphoneos14.0 FlyBuySDK/FlyBuySDK.framework/Headers/FlyBuySDK-Swift.h -scope FlyBuySDK/FlyBuySDK.framework/Headers
-    ```
+1. Run the following sharpie commands (using current iOS SDK version):
+```
+flybuy-ios-xamarin % sharpie bind --output=FlyBuy --namespace=FlyBuy -framework FlyBuy/FlyBuy.xcframework/ios-arm64/FlyBuy.framework -sdk=iphoneos14.4
+```
 
-1. In `ApiDefinition.cs`, delete the "verify" build errors related to `MethodToProperty`.
+```
+sharpie bind --output=FlyBuyPickup --namespace=FlyBuy -framework FlyBuyPickup/FlyBuyPickup.xcframework/ios-arm64/FlyBuyPickup.framework -sdk=iphoneos14.4
+```
 
-1. Move the code generated for `CoreOrder_FlyBuy_Swift_218` directly into `CoreOrder`. (This appears to be an artifact from `CoreOrder` being a CoreData entity `NSManagedObject`.)
+```
+sharpie bind --output=FlyBuyNotify --namespace=FlyBuy -framework FlyBuyNotify/FlyBuyNotify.xcframework/ios-arm64/FlyBuyNotify.framework -sdk=iphoneos14.4
+```
 
-1. Add Swift class names for each of the FlyBuy `interface`s generated. The Swift class name associated with a class can be found in `FlyBuy.framework/Headers/FlyBuy-Swift.h`. They appear as `SWIFT_CLASS` annotations immediately prior to the associated`@interface` definition.
+```
+sharpie bind --output=FlyBuyPresence --namespace=FlyBuy -framework FlyBuyPresence/FlyBuyPresence.xcframework/ios-arm64/FlyBuyPresence.framework -sdk=iphoneos14.4
+```
+
+1. In `ApiDefinitions.cs`, delete the "verify" build errors related to `MethodToProperty`.
 
