@@ -1,53 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props')" />
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectTypeGuids>{8FFB629D-F513-41CE-95D2-7ECE97B6EEEC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{BECB65E9-7DAA-475B-B16A-4DACED4D1147}</ProjectGuid>
-    <TemplateGuid>{b6f3ff35-79b2-4f25-a2fc-60a7cf61013b}</TemplateGuid>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{38B12DEA-87A6-495D-B933-C6BBB259BCF9}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{a52b8a63-bc84-4b47-910d-692533484892}</TemplateGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NativeLibrary</RootNamespace>
+    <RootNamespace>FlyBuySDK</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>NativeLibrary</AssemblyName>
+    <AssemblyName>FlyBuySDK</AssemblyName>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>Radiusnetworks.Flybuy.IOS</PackageId>
-    <PackageVersion>2.1.2</PackageVersion>
+    <PackageVersion>2.1.4</PackageVersion>
     <Authors>Radius Networks, Inc</Authors>
-    <Description>FlyBuy Pickup SDK for Xamarin/iOS.</Description>
     <Copyright>Copyright (c) 2021 by Radius Networks</Copyright>
     <PackageIconUrl>https://www.radiusnetworks.com/wp-content/uploads/FlyBuyPickup_logo.svg</PackageIconUrl>
-    <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseUrl>https://github.com/RadiusNetworks/flybuy-ios/blob/master/LICENSE</PackageLicenseUrl>
     <Owners>Radius Networks, Inc</Owners>
     <PackageProjectUrl>https://www.radiusnetworks.com/flybuy</PackageProjectUrl>
-    <PackageReleaseNotes>Bug Fixes:
- * Fixes a deadlock issue that can occur when upgrading from an older SDK version</PackageReleaseNotes>
     <Title>FlyBuy 2.0 SDK</Title>
+    <Description>FlyBuy SDK 2.0 for Xamarin/iOS</Description>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
@@ -57,20 +56,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
+    <ProjectReference Include="..\FlyBuy\FlyBuy.csproj">
+      <Name>FlyBuy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlyBuyNotify\FlyBuyNotify.csproj">
+      <Name>FlyBuyNotify</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlyBuyPickup\FlyBuyPickup.csproj">
+      <Name>FlyBuyPickup</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlyBuyPresence\FlyBuyPresence.csproj">
+      <Name>FlyBuyPresence</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+    <PackageReference Include="NuGet.Build.Packaging">
+      <Version>0.2.2</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <NativeReference Include="FlyBuySDK.framework">
-      <Kind>Framework</Kind>
-      <SmartLink>False</SmartLink>
-    </NativeReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
-  <Import Project="..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets')" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
