@@ -2,19 +2,45 @@
 
 ### Nuget
 
-This is available on nuget.org here: https://www.nuget.org/packages/Radiusnetworks.Flybuy.IOS/
+The FlyBuy SDK is published on nuget.org at the following location: https://www.nuget.org/packages/Radiusnetworks.Flybuy.IOS
 
 ### Add FlyBuySDK to your Xamarin.iOS project
 
-In order to use `FlyBuy` from a Xamarin.iOS project, you need to add the FlyBuySDK bindings library to your Xamarin.iOS solution
+Select _Packages_ in your VS project and go to _Manage NuGet Packages..._. Search for `Radiusnetworks.Flybuy.IOS` and click `Add Package`. The latest SDK will be added to your project and can be references with `using FlyBuy;`.
 
-1. Unzip the FlyBuy SDK bindings library project in your solution root directory.
-2. In your solution in Visual Studio, right-click on your solution and choose `Add -> Add Existing Project…`.
-3. In the `FlyBuySDK` directory, choose the file `FlyBuySDK.csproj` and click `Open`.
+## Creating iOS bindings library in Xamarin for FlyBuy
 
-### Add a Reference to the FlyBuySDK bindings library
+1. Download the latest native SDK release from https://github.com/RadiusNetworks/flybuy-ios/releases
 
-1. In your app project, right-click on `References` and choose `Edit References…`.
-2. Click on the `Projects` tab, then check `FlyBuySDK`.
-3. Now you can add the following to any C# files in your app where you want to use classes from `FlyBuySDK`:
+1. Unzip the archive and copy the `xcframework` directories for each module to their related directories. E.G.
+    ```
+    flybuy-ios-2.1.5/FlyBuyPickup.xcframework --> FlyBuyPickup
+    ```
 
+1. Select _Native References_ in the VS project for each module and add the related `framework` for the `ios-arm64` binary.
+
+1. Install Objective Sharpie to generate the binding API definitions.
+
+1. Start from the project root directory, the use the following command to find the current iOS SDK version installed.
+    ```
+    sharpie xcode -sdks
+    ```
+
+1. Run the following sharpie commands (using current iOS SDK version):
+    ```
+    sharpie bind --output=FlyBuy --namespace=FlyBuy -framework FlyBuy/FlyBuy.xcframework/ios-arm64/FlyBuy.framework -sdk=iphoneos14.4
+    ```
+
+    ```
+    sharpie bind --output=FlyBuyPickup --namespace=FlyBuy -framework FlyBuyPickup/FlyBuyPickup.xcframework/ios-arm64/FlyBuyPickup.framework -sdk=iphoneos14.4
+    ```
+
+    ```
+    sharpie bind --output=FlyBuyNotify --namespace=FlyBuy -framework FlyBuyNotify/FlyBuyNotify.xcframework/ios-arm64/FlyBuyNotify.framework -sdk=iphoneos14.4
+    ```
+
+    ```
+    sharpie bind --output=FlyBuyPresence --namespace=FlyBuy -framework FlyBuyPresence/FlyBuyPresence.xcframework/ios-arm64/FlyBuyPresence.framework -sdk=iphoneos14.4
+    ```
+
+1. In `ApiDefinitions.cs`, delete the "verify" build errors related to `MethodToProperty`.
