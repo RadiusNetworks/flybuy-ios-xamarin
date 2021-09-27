@@ -6,7 +6,10 @@ The FlyBuy SDK is published on nuget.org at the following location: https://www.
 
 ### Add FlyBuySDK to your Xamarin.iOS project
 
-Select _Packages_ in your VS project and go to _Manage NuGet Packages..._. Search for `Radiusnetworks.Flybuy.IOS` and click `Add Package`. The latest SDK will be added to your project and can be references with `using FlyBuy;`.
+Select `Packages` in your VS project and go to `Manage NuGet Packages...`. Search for `Radiusnetworks.Flybuy.IOS` and click `Add Package`. The latest SDK will be added to your project and can be referenced with the following:
+```
+using FlyBuy;
+```
 
 ## Creating iOS bindings library in Xamarin for FlyBuy
 
@@ -44,3 +47,6 @@ Select _Packages_ in your VS project and go to _Manage NuGet Packages..._. Searc
     ```
 
 1. In `ApiDefinitions.cs`, delete the "verify" build errors related to `MethodToProperty`.
+
+1. The bindings project will now reference the new `xcframework` and API definition files and can be built.
+
