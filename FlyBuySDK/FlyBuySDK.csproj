@@ -15,7 +15,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>Radiusnetworks.Flybuy.IOS</PackageId>
-    <PackageVersion>2.1.4</PackageVersion>
+    <PackageVersion>2.1.5</PackageVersion>
     <Authors>Radius Networks, Inc</Authors>
     <Copyright>Copyright (c) 2021 by Radius Networks</Copyright>
     <PackageIconUrl>https://www.radiusnetworks.com/wp-content/uploads/FlyBuyPickup_logo.svg</PackageIconUrl>
@@ -24,6 +24,7 @@
     <PackageProjectUrl>https://www.radiusnetworks.com/flybuy</PackageProjectUrl>
     <Title>FlyBuy 2.0 SDK</Title>
     <Description>FlyBuy SDK 2.0 for Xamarin/iOS</Description>
+    <PackageReleaseNotes>* Fixes user not authorized error for login with token method.</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
