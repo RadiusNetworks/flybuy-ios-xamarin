@@ -303,6 +303,13 @@ namespace FlyBuy
 		IntPtr Constructor (string emailAddress, string password);
 	}
 
+	// @interface NotifyConfig : NSObject
+	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy12NotifyConfig")]
+	[DisableDefaultCtor]
+	interface NotifyConfig
+	{
+	}
+
 	// @interface FlyBuyOrder : NSObject
 	[BaseType (typeof(NSObject))]
 	[DisableDefaultCtor]
@@ -484,6 +491,22 @@ namespace FlyBuy
 		[NullAllowed, Export ("pushToken")]
 		string PushToken { get; set; }
 
+		// @property (copy, nonatomic) NSString * _Nullable spotIdentifer;
+		[NullAllowed, Export ("spotIdentifer")]
+		string SpotIdentifer { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable spotIdentifierInputType;
+		[NullAllowed, Export ("spotIdentifierInputType")]
+		string SpotIdentifierInputType { get; set; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable partnerIdentifierForCustomer;
+		[NullAllowed, Export ("partnerIdentifierForCustomer")]
+		string PartnerIdentifierForCustomer { get; }
+
+		// @property (readonly, copy, nonatomic) NSString * _Nullable partnerIdentifierForCrew;
+		[NullAllowed, Export ("partnerIdentifierForCrew")]
+		string PartnerIdentifierForCrew { get; }
+
 		// -(CLLocation * _Nullable)siteLocation __attribute__((warn_unused_result("")));
 		[NullAllowed, Export ("siteLocation")]
 		CLLocation SiteLocation { get; }
@@ -507,6 +530,11 @@ namespace FlyBuy
 		[Export ("initWithOrderID:customerState:etaSeconds:")]
 		[DesignatedInitializer]
 		IntPtr Constructor (nint orderID, string customerState, [NullAllowed] NSNumber etaSeconds);
+
+		// -(instancetype _Nonnull)initWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState spotIdentifier:(NSString * _Nullable)spotIdentifier __attribute__((objc_designated_initializer));
+		[Export ("initWithOrderID:customerState:spotIdentifier:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (nint orderID, string customerState, [NullAllowed] string spotIdentifier);
 
 		// -(instancetype _Nonnull)initWithOrderID:(NSInteger)orderID state:(NSString * _Nonnull)state __attribute__((objc_designated_initializer));
 		[Export ("initWithOrderID:state:")]
@@ -572,6 +600,10 @@ namespace FlyBuy
 		[Export ("updateCustomerStateWithOrderID:customerState:callback:")]
 		void UpdateCustomerStateWithOrderID (nint orderID, string customerState, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
 
+		// -(void)updateCustomerStateWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState spotIdentifier:(NSString * _Nullable)spotIdentifier callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
+		[Export ("updateCustomerStateWithOrderID:customerState:spotIdentifier:callback:")]
+		void UpdateCustomerStateWithOrderID (nint orderID, string customerState, [NullAllowed] string spotIdentifier, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
+
 		// -(void)updateOrderStateWithOrderID:(NSInteger)orderID state:(NSString * _Nonnull)state callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
 		[Export ("updateOrderStateWithOrderID:state:callback:")]
 		void UpdateOrderStateWithOrderID (nint orderID, string state, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
@@ -623,6 +655,10 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)init:(NSDate * _Nonnull)date;
 		[Export ("init:")]
 		IntPtr Constructor (NSDate date);
+
+		// -(NSString * _Nonnull)formattedStringWithLocale:(NSLocale * _Nonnull)locale __attribute__((warn_unused_result("")));
+		[Export ("formattedStringWithLocale:")]
+		string FormattedStringWithLocale (NSLocale locale);
 	}
 
 	// @interface FlyBuyRequestPasswordReset : NSObject
