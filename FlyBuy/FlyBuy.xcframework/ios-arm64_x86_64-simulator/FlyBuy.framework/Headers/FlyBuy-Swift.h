@@ -471,6 +471,13 @@ SWIFT_CLASS_NAMED("LoginInfo")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+SWIFT_CLASS("_TtC6FlyBuy12NotifyConfig")
+@interface NotifyConfig : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class CLLocation;
 @class NSNumber;
 
@@ -520,6 +527,10 @@ SWIFT_CLASS_NAMED("Order")
 @property (nonatomic, readonly, copy) NSString * _Nullable curbsideLocalizedString;
 @property (nonatomic, readonly, copy) NSString * _Nullable pickupLocalizedString;
 @property (nonatomic, copy) NSString * _Nullable pushToken;
+@property (nonatomic, copy) NSString * _Nullable spotIdentifer;
+@property (nonatomic, copy) NSString * _Nullable spotIdentifierInputType;
+@property (nonatomic, readonly, copy) NSString * _Nullable partnerIdentifierForCustomer;
+@property (nonatomic, readonly, copy) NSString * _Nullable partnerIdentifierForCrew;
 - (CLLocation * _Nullable)siteLocation SWIFT_WARN_UNUSED_RESULT;
 - (NSNumber * _Nullable)siteDistanceFrom:(CLLocation * _Nonnull)location SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly, strong) NSNumber * _Nullable customerID;
@@ -534,6 +545,7 @@ SWIFT_CLASS_NAMED("Order")
 SWIFT_CLASS_NAMED("OrderEvent")
 @interface FlyBuyOrderEvent : NSObject
 - (nonnull instancetype)initWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState etaSeconds:(NSNumber * _Nullable)etaSeconds OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState spotIdentifier:(NSString * _Nullable)spotIdentifier OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithOrderID:(NSInteger)orderID state:(NSString * _Nonnull)state OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithOrderID:(NSInteger)orderID locationAuthStatus:(enum LocationAuthStatus)locationAuthStatus OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithOrderID:(NSInteger)orderID customerRating:(NSInteger)customerRating customerComments:(NSString * _Nullable)customerComments OBJC_DESIGNATED_INITIALIZER;
@@ -617,6 +629,16 @@ SWIFT_CLASS_NAMED("OrdersManager")
 /// \param callback Gets called at completion with the order or any error encountered. Optional.
 ///
 - (void)updateCustomerStateWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
+/// creates an order event that sets the customer state
+/// \param orderID specifies which order ID this event relates to
+///
+/// \param customerState contains the customer state which should be set on the order
+///
+/// \param spotIdentifier contains the parking  spot identifier
+///
+/// \param callback Gets called at completion with the order or any error encountered. Optional.
+///
+- (void)updateCustomerStateWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState spotIdentifier:(NSString * _Nullable)spotIdentifier callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
 /// creates an order event that sets the order state
 /// \param orderID specifies which order ID this event relates to
 ///
@@ -662,6 +684,7 @@ SWIFT_CLASS_NAMED("PickupWindow")
 @property (nonatomic, readonly, copy) NSDate * _Nonnull end;
 - (nonnull instancetype)initWithStart:(NSDate * _Nonnull)start end:(NSDate * _Nonnull)end OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init:(NSDate * _Nonnull)date;
+- (NSString * _Nonnull)formattedStringWithLocale:(NSLocale * _Nonnull)locale SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1261,6 +1284,13 @@ SWIFT_CLASS_NAMED("LoginInfo")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+SWIFT_CLASS("_TtC6FlyBuy12NotifyConfig")
+@interface NotifyConfig : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class CLLocation;
 @class NSNumber;
 
@@ -1310,6 +1340,10 @@ SWIFT_CLASS_NAMED("Order")
 @property (nonatomic, readonly, copy) NSString * _Nullable curbsideLocalizedString;
 @property (nonatomic, readonly, copy) NSString * _Nullable pickupLocalizedString;
 @property (nonatomic, copy) NSString * _Nullable pushToken;
+@property (nonatomic, copy) NSString * _Nullable spotIdentifer;
+@property (nonatomic, copy) NSString * _Nullable spotIdentifierInputType;
+@property (nonatomic, readonly, copy) NSString * _Nullable partnerIdentifierForCustomer;
+@property (nonatomic, readonly, copy) NSString * _Nullable partnerIdentifierForCrew;
 - (CLLocation * _Nullable)siteLocation SWIFT_WARN_UNUSED_RESULT;
 - (NSNumber * _Nullable)siteDistanceFrom:(CLLocation * _Nonnull)location SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly, strong) NSNumber * _Nullable customerID;
@@ -1324,6 +1358,7 @@ SWIFT_CLASS_NAMED("Order")
 SWIFT_CLASS_NAMED("OrderEvent")
 @interface FlyBuyOrderEvent : NSObject
 - (nonnull instancetype)initWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState etaSeconds:(NSNumber * _Nullable)etaSeconds OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState spotIdentifier:(NSString * _Nullable)spotIdentifier OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithOrderID:(NSInteger)orderID state:(NSString * _Nonnull)state OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithOrderID:(NSInteger)orderID locationAuthStatus:(enum LocationAuthStatus)locationAuthStatus OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithOrderID:(NSInteger)orderID customerRating:(NSInteger)customerRating customerComments:(NSString * _Nullable)customerComments OBJC_DESIGNATED_INITIALIZER;
@@ -1407,6 +1442,16 @@ SWIFT_CLASS_NAMED("OrdersManager")
 /// \param callback Gets called at completion with the order or any error encountered. Optional.
 ///
 - (void)updateCustomerStateWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
+/// creates an order event that sets the customer state
+/// \param orderID specifies which order ID this event relates to
+///
+/// \param customerState contains the customer state which should be set on the order
+///
+/// \param spotIdentifier contains the parking  spot identifier
+///
+/// \param callback Gets called at completion with the order or any error encountered. Optional.
+///
+- (void)updateCustomerStateWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState spotIdentifier:(NSString * _Nullable)spotIdentifier callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
 /// creates an order event that sets the order state
 /// \param orderID specifies which order ID this event relates to
 ///
@@ -1452,6 +1497,7 @@ SWIFT_CLASS_NAMED("PickupWindow")
 @property (nonatomic, readonly, copy) NSDate * _Nonnull end;
 - (nonnull instancetype)initWithStart:(NSDate * _Nonnull)start end:(NSDate * _Nonnull)end OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init:(NSDate * _Nonnull)date;
+- (NSString * _Nonnull)formattedStringWithLocale:(NSLocale * _Nonnull)locale SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end

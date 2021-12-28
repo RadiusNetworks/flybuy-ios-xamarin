@@ -2,6 +2,8 @@ using System;
 using CoreLocation;
 using Foundation;
 using ObjCRuntime;
+using UIKit;
+using UserNotifications;
 
 namespace FlyBuy
 {
@@ -30,21 +32,40 @@ namespace FlyBuy
 		[Export ("configure")]
 		void Configure ();
 
-		// -(void)createForSitesInRegion:(CLCircularRegion * _Nonnull)region notification:(NotificationInfo * _Nonnull)notification callback:(void (^ _Nonnull)(NSArray<FlyBuySite *> * _Nullable, NSError * _Nullable))callback;
+		// -(void)createForSitesInRegion:(CLCircularRegion * _Nonnull)region notification:(NotificationInfo * _Nonnull)notification callback:(void (^ _Nonnull)(NSArray<FlyBuySite *> * _Nullable, NSError * _Nullable))callback __attribute__((deprecated("This method for using Notify has been deprecated.")));
 		[Export ("createForSitesInRegion:notification:callback:")]
 		void CreateForSitesInRegion (CLCircularRegion region, NotificationInfo notification, Action<NSArray<FlyBuySite>, NSError> callback);
 
-		// -(void)createForSites:(NSArray<FlyBuySite *> * _Nonnull)sites notification:(NotificationInfo * _Nonnull)notification callback:(void (^ _Nonnull)(NSError * _Nullable))callback;
+		// -(void)createForSites:(NSArray<FlyBuySite *> * _Nonnull)sites notification:(NotificationInfo * _Nonnull)notification callback:(void (^ _Nonnull)(NSError * _Nullable))callback __attribute__((deprecated("This method for using Notify has been deprecated.")));
 		[Export ("createForSites:notification:callback:")]
 		void CreateForSites (FlyBuySite[] sites, NotificationInfo notification, Action<NSError> callback);
 
-		// -(void)clearWithCallback:(void (^ _Nonnull)(NSError * _Nullable))callback;
+		// -(void)clearWithCallback:(void (^ _Nonnull)(NSError * _Nullable))callback __attribute__((deprecated("This method for using Notify has been deprecated.")));
 		[Export ("clearWithCallback:")]
 		void ClearWithCallback (Action<NSError> callback);
 
-		// -(BOOL)isFlyBuyNotifyUserInfo:(NSDictionary * _Nonnull)userInfo __attribute__((warn_unused_result("")));
+		// -(BOOL)isFlyBuyNotifyUserInfo:(NSDictionary * _Nonnull)userInfo __attribute__((warn_unused_result(""))) __attribute__((deprecated("This method for using Notify has been deprecated.")));
 		[Export ("isFlyBuyNotifyUserInfo:")]
 		bool IsFlyBuyNotifyUserInfo (NSDictionary userInfo);
+	}
+
+	// @interface FlyBuyNotify_Swift_236 (FlyBuyNotifyManager)
+	[Category]
+	[BaseType (typeof(FlyBuyNotifyManager))]
+	interface FlyBuyNotifyManager_FlyBuyNotify_Swift_236
+	{
+		// -(void)syncWithForce:(BOOL)force callback:(void (^ _Nullable)(NSError * _Nullable))callback;
+		[Export ("syncWithForce:callback:")]
+		void SyncWithForce (bool force, [NullAllowed] Action<NSError> callback);
+
+		// -(void)performFetchWithCompletionHandler:(void (^ _Nullable)(UIBackgroundFetchResult))completionHandler;
+		[Export ("performFetchWithCompletionHandler:")]
+		void PerformFetchWithCompletionHandler ([NullAllowed] Action<UIBackgroundFetchResult> completionHandler);
+
+		// -(NSDictionary<NSString *,NSString *> * _Nullable)handleNotification:(UNNotificationResponse * _Nonnull)response __attribute__((warn_unused_result("")));
+		[Export ("handleNotification:")]
+		[return: NullAllowed]
+		NSDictionary<NSString, NSString> HandleNotification (UNNotificationResponse response);
 	}
 
 	// @interface NotificationInfo : NSObject
