@@ -71,6 +71,9 @@
     <ProjectReference Include="..\FlyBuyPresence\FlyBuyPresence.csproj">
       <Name>FlyBuyPresence</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlyBuyTableside\FlyBuyTableside.csproj">
+      <Name>FlyBuyTableside</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NuGet.Build.Packaging">
