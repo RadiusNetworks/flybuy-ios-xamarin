@@ -102,20 +102,11 @@ namespace FlyBuy
 		void UpdateAPNPushToken (NSData deviceToken);
 	}
 
-	// @interface FlyBuyCreateOrderInfo : NSObject
-	[BaseType (typeof(NSObject))]
+	// @interface CreateOrderInfo : NSObject
+	[BaseType (typeof(NSObject), Name = "_TtC6FlyBuy15CreateOrderInfo")]
 	[DisableDefaultCtor]
-	interface FlyBuyCreateOrderInfo
+	interface CreateOrderInfo
 	{
-		// -(instancetype _Nonnull)initWithSiteID:(NSInteger)siteID partnerIdentifier:(NSString * _Nonnull)partnerIdentifier customerCarColor:(NSString * _Nullable)customerCarColor customerCarType:(NSString * _Nullable)customerCarType customerLicensePlate:(NSString * _Nullable)customerLicensePlate customerName:(NSString * _Nullable)customerName customerPhone:(NSString * _Nullable)customerPhone pushToken:(NSString * _Nullable)pushToken state:(NSString * _Nullable)state pickupWindow:(FlyBuyPickupWindow * _Nullable)pickupWindow __attribute__((objc_designated_initializer));
-		[Export ("initWithSiteID:partnerIdentifier:customerCarColor:customerCarType:customerLicensePlate:customerName:customerPhone:pushToken:state:pickupWindow:")]
-		[DesignatedInitializer]
-		IntPtr Constructor (nint siteID, string partnerIdentifier, [NullAllowed] string customerCarColor, [NullAllowed] string customerCarType, [NullAllowed] string customerLicensePlate, [NullAllowed] string customerName, [NullAllowed] string customerPhone, [NullAllowed] string pushToken, [NullAllowed] string state, [NullAllowed] FlyBuyPickupWindow pickupWindow);
-
-		// -(instancetype _Nonnull)initWithSiteID:(NSInteger)siteID partnerIdentifier:(NSString * _Nonnull)partnerIdentifier customerCarColor:(NSString * _Nullable)customerCarColor customerCarType:(NSString * _Nullable)customerCarType customerLicensePlate:(NSString * _Nullable)customerLicensePlate customerName:(NSString * _Nullable)customerName customerPhone:(NSString * _Nullable)customerPhone pushToken:(NSString * _Nullable)pushToken pickupWindow:(FlyBuyPickupWindow * _Nullable)pickupWindow __attribute__((objc_designated_initializer));
-		[Export ("initWithSiteID:partnerIdentifier:customerCarColor:customerCarType:customerLicensePlate:customerName:customerPhone:pushToken:pickupWindow:")]
-		[DesignatedInitializer]
-		IntPtr Constructor (nint siteID, string partnerIdentifier, [NullAllowed] string customerCarColor, [NullAllowed] string customerCarType, [NullAllowed] string customerLicensePlate, [NullAllowed] string customerName, [NullAllowed] string customerPhone, [NullAllowed] string pushToken, [NullAllowed] FlyBuyPickupWindow pickupWindow);
 	}
 
 	// @interface FlyBuyCustomer : NSObject
@@ -123,6 +114,10 @@ namespace FlyBuy
 	[DisableDefaultCtor]
 	interface FlyBuyCustomer
 	{
+		// @property (readonly, nonatomic) NSInteger id;
+		[Export ("id")]
+		nint Id { get; }
+
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull token;
 		[Export ("token")]
 		string Token { get; }
@@ -589,12 +584,24 @@ namespace FlyBuy
 		void ClaimWithRedemptionCode (string redemptionCode, FlyBuyCustomerInfo customerInfo, [NullAllowed] string pickupType, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
 
 		// -(void)createWithSiteID:(NSInteger)siteID partnerIdentifier:(NSString * _Nonnull)partnerIdentifier customerInfo:(FlyBuyCustomerInfo * _Nonnull)customerInfo pickupWindow:(FlyBuyPickupWindow * _Nullable)pickupWindow state:(NSString * _Nonnull)state callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
-		[Export ("createWithSiteID:partnerIdentifier:customerInfo:pickupWindow:state:callback:")]
-		void CreateWithSiteID (nint siteID, string partnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, string state, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
+		//[Export ("createWithSiteID:partnerIdentifier:customerInfo:pickupWindow:state:callback:")]
+		//void CreateWithSiteID (nint siteID, string partnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, string state, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
+
+		// -(void)createWithSiteID:(NSInteger)siteID partnerIdentifier:(NSString * _Nonnull)partnerIdentifier customerInfo:(FlyBuyCustomerInfo * _Nonnull)customerInfo pickupWindow:(FlyBuyPickupWindow * _Nullable)pickupWindow state:(NSString * _Nonnull)state pickupType:(NSString * _Nullable)pickupType callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
+		[Export ("createWithSiteID:partnerIdentifier:customerInfo:pickupWindow:state:pickupType:callback:")]
+		void CreateWithSiteID (nint siteID, string partnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, string state, [NullAllowed] string pickupType, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
 
 		// -(void)createWithSiteID:(NSInteger)siteID partnerIdentifier:(NSString * _Nonnull)partnerIdentifier customerInfo:(FlyBuyCustomerInfo * _Nonnull)customerInfo pickupWindow:(FlyBuyPickupWindow * _Nullable)pickupWindow callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
 		[Export ("createWithSiteID:partnerIdentifier:customerInfo:pickupWindow:callback:")]
 		void CreateWithSiteID (nint siteID, string partnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
+
+		// -(void)createWithSiteID:(NSInteger)siteID partnerIdentifier:(NSString * _Nonnull)partnerIdentifier customerInfo:(FlyBuyCustomerInfo * _Nonnull)customerInfo pickupWindow:(FlyBuyPickupWindow * _Nullable)pickupWindow pickupType:(NSString * _Nullable)pickupType callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
+		[Export ("createWithSiteID:partnerIdentifier:customerInfo:pickupWindow:pickupType:callback:")]
+		void CreateWithSiteID (nint siteID, string partnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, [NullAllowed] string pickupType, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
+
+		// -(void)createWithSiteID:(NSInteger)siteID partnerIdentifier:(NSString * _Nonnull)partnerIdentifier customerInfo:(FlyBuyCustomerInfo * _Nonnull)customerInfo state:(NSString * _Nullable)state pickupType:(NSString * _Nullable)pickupType callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
+		[Export ("createWithSiteID:partnerIdentifier:customerInfo:state:pickupType:callback:")]
+		void CreateWithSiteID (nint siteID, string partnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] string state, [NullAllowed] string pickupType, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
 
 		// -(void)updateCustomerStateWithOrderID:(NSInteger)orderID customerState:(NSString * _Nonnull)customerState callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
 		[Export ("updateCustomerStateWithOrderID:customerState:callback:")]

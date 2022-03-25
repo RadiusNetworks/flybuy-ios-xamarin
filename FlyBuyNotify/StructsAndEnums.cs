@@ -11,6 +11,7 @@ namespace FlyBuy
 		CoreIsNotConfigured = 3,
 		NotifyModuleNotEnabled = 4,
 		BeaconRangingNotAvailable = 5,
-		NoBeaconInRange = 6
+		NoBeaconInRange = 6,
+		BeaconRangingDisabledInBackground = 7
 	}
 }

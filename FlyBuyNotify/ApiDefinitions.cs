@@ -28,9 +28,9 @@ namespace FlyBuy
 		[Export ("shared", ArgumentSemantic.Strong)]
 		FlyBuyNotifyManager Shared { get; }
 
-		// -(void)configure;
-		[Export ("configure")]
-		void Configure ();
+		// -(void)configureWithBgTaskIdentifier:(NSString * _Nullable)bgTaskIdentifier bgSyncCallback:(void (^ _Nullable)(NSError * _Nullable))bgSyncCallback;
+		[Export ("configureWithBgTaskIdentifier:bgSyncCallback:")]
+		void ConfigureWithBgTaskIdentifier ([NullAllowed] string bgTaskIdentifier, [NullAllowed] Action<NSError> bgSyncCallback);
 
 		// -(void)createForSitesInRegion:(CLCircularRegion * _Nonnull)region notification:(NotificationInfo * _Nonnull)notification callback:(void (^ _Nonnull)(NSArray<FlyBuySite *> * _Nullable, NSError * _Nullable))callback __attribute__((deprecated("This method for using Notify has been deprecated.")));
 		[Export ("createForSitesInRegion:notification:callback:")]
@@ -49,10 +49,10 @@ namespace FlyBuy
 		bool IsFlyBuyNotifyUserInfo (NSDictionary userInfo);
 	}
 
-	// @interface FlyBuyNotify_Swift_236 (FlyBuyNotifyManager)
+	// @interface FlyBuyNotify_Swift_244 (FlyBuyNotifyManager)
 	[Category]
 	[BaseType (typeof(FlyBuyNotifyManager))]
-	interface FlyBuyNotifyManager_FlyBuyNotify_Swift_236
+	interface FlyBuyNotifyManager_FlyBuyNotify_Swift_244
 	{
 		// -(void)syncWithForce:(BOOL)force callback:(void (^ _Nullable)(NSError * _Nullable))callback;
 		[Export ("syncWithForce:callback:")]
