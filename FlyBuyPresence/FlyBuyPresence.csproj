@@ -57,7 +57,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="FlyBuyPresence.xcframework\ios-arm64\FlyBuyPresence.framework">
+    <NativeReference Include="FlyBuyPresence.xcframework\ios-arm64_x86_64-simulator\FlyBuyPresence.framework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>

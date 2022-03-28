@@ -52,7 +52,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="FlyBuy.xcframework\ios-arm64\FlyBuy.framework">
+    <NativeReference Include="FlyBuy.xcframework\ios-arm64_x86_64-simulator\FlyBuy.framework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>

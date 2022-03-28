@@ -14,7 +14,7 @@
     <AssemblyName>FlyBuySDK</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <PackOnBuild>true</PackOnBuild>
-    <PackageId>Radiusnetworks.Flybuy.IOS</PackageId>
+    <PackageId>Radiusnetworks.Flybuy.IOS.sim</PackageId>
     <PackageVersion>2.4.1</PackageVersion>
     <Authors>Radius Networks, Inc</Authors>
     <Copyright>Copyright (c) 2021 by Radius Networks</Copyright>
