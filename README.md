@@ -105,6 +105,9 @@ FlyBuyCore.Orders.UpdateCustomerStateWithOrderID(currentOrder.Id, "completed", c
     sharpie bind --output=FlyBuyPresence --namespace=FlyBuy -framework FlyBuyPresence/FlyBuyPresence.xcframework/ios-arm64/FlyBuyPresence.framework -sdk=iphoneos14.4
     ```
 
+    ```
+    sharpie bind --output=FlyBuyTableside --namespace=FlyBuy -framework FlyBuyTableside/FlyBuyTableside.xcframework/ios-arm64/FlyBuyTableside.framework -sdk=iphoneos14.4
+    ```
 1. In `ApiDefinitions.cs`, delete the "verify" build errors related to `MethodToProperty`.
 
 1. The bindings project will now reference the new `xcframework` and API definition files and can be built.

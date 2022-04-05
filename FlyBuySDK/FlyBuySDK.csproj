@@ -14,8 +14,8 @@
     <AssemblyName>FlyBuySDK</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <PackOnBuild>true</PackOnBuild>
-    <PackageId>Radiusnetworks.Flybuy.IOS</PackageId>
-    <PackageVersion>2.2.2</PackageVersion>
+    <PackageId>Radiusnetworks.Flybuy.IOS.sim</PackageId>
+    <PackageVersion>2.4.1</PackageVersion>
     <Authors>Radius Networks, Inc</Authors>
     <Copyright>Copyright (c) 2021 by Radius Networks</Copyright>
     <PackageIconUrl>https://www.radiusnetworks.com/wp-content/uploads/FlyBuyPickup_logo.svg</PackageIconUrl>
@@ -25,8 +25,13 @@
     <Title>FlyBuy 2.0 SDK</Title>
     <Description>FlyBuy SDK 2.0 for Xamarin/iOS</Description>
     <PackageReleaseNotes>Enhancements:
- * Adds support for manual spot entry
- * Adds `partner_identifier_for_customer` and `partner_identifier_for_crew` to order response</PackageReleaseNotes>
+ * Added support for BGAppRefreshTask to improve syncing on iOS 13 and higher.
+ * New Tableside module for customers using Flybuy Tableside.
+ * Support for "Defer on Pickup" Notify campaigns
+
+Bug Fixes:
+ * Allow creation of orders with optional pickupType
+ * Fixed issued syncing campaign events in the background for beacon-based campaigns.</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,6 +75,9 @@
     </ProjectReference>
     <ProjectReference Include="..\FlyBuyPresence\FlyBuyPresence.csproj">
       <Name>FlyBuyPresence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlyBuyTableside\FlyBuyTableside.csproj">
+      <Name>FlyBuyTableside</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
