@@ -11,9 +11,9 @@ namespace FlyBuy
 		[Field ("FlyBuyTablesideVersionNumber", "__Internal")]
 		double FlyBuyTablesideVersionNumber { get; }
 
-		// extern const unsigned char [] FlyBuyTablesideVersionString;
+		// extern const unsigned char[] FlyBuyTablesideVersionString;
 		[Field ("FlyBuyTablesideVersionString", "__Internal")]
-		NSString FlyBuyTablesideVersionString { get; }
+		byte[] FlyBuyTablesideVersionString { get; }
 	}
 
 	// @interface FlyBuyAPIError : NSObject
@@ -47,13 +47,17 @@ namespace FlyBuy
 		[Export ("maxPayloadSize")]
 		nint MaxPayloadSize { get; }
 
-		// @property (copy, nonatomic) NSString * _Nullable apiToken;
+		// @property (readonly, copy, nonatomic) NSString * _Nullable apiToken;
 		[NullAllowed, Export ("apiToken")]
-		string ApiToken { get; set; }
+		string ApiToken { get; }
 
-		// @property (copy, nonatomic) NSString * _Nullable kitID;
+		// @property (readonly, copy, nonatomic) NSString * _Nullable kitID;
 		[NullAllowed, Export ("kitID")]
-		string KitID { get; set; }
+		string KitID { get; }
+
+		[Wrap ("WeakDelegate")]
+		[NullAllowed]
+		TablesideSiteMonitorDelegate Delegate { get; set; }
 
 		// @property (nonatomic, strong) id<TablesideSiteMonitorDelegate> _Nullable delegate;
 		[NullAllowed, Export ("delegate", ArgumentSemantic.Strong)]
@@ -84,10 +88,10 @@ namespace FlyBuy
 		NSError Stop { get; }
 	}
 
-	// @interface FlyBuyTableside_Swift_271 (FlyBuyTablesideManager)
+	// @interface FlyBuyTableside_Swift_453 (FlyBuyTablesideManager)
 	[Category]
 	[BaseType (typeof(FlyBuyTablesideManager))]
-	interface FlyBuyTablesideManager_FlyBuyTableside_Swift_271
+	interface FlyBuyTablesideManager_FlyBuyTableside_Swift_453
 	{
 		// -(void)requestAlwaysAuthorization;
 		[Export ("requestAlwaysAuthorization")]
@@ -110,7 +114,7 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)init:(enum TablesideErrorType)typeIn __attribute__((objc_designated_initializer));
 		[Export ("init:")]
 		[DesignatedInitializer]
-		IntPtr Constructor (TablesideErrorType typeIn);
+		NativeHandle Constructor (TablesideErrorType typeIn);
 
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
 		[Export ("description")]
@@ -150,7 +154,7 @@ namespace FlyBuy
 	// @interface TablesideSite : NSObject
 	[BaseType (typeof(NSObject))]
 	[DisableDefaultCtor]
-	interface TablesideSite : INativeObject
+	interface TablesideSite
 	{
 	}
 

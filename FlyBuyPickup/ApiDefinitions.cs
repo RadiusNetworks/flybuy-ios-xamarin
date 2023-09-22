@@ -11,15 +11,15 @@ namespace FlyBuy
 		[Field ("FlyBuyPickupVersionNumber", "__Internal")]
 		double FlyBuyPickupVersionNumber { get; }
 
-		// extern const unsigned char [] FlyBuyPickupVersionString;
+		// extern const unsigned char[] FlyBuyPickupVersionString;
 		[Field ("FlyBuyPickupVersionString", "__Internal")]
-		NSString FlyBuyPickupVersionString { get; }
+		byte[] FlyBuyPickupVersionString { get; }
 	}
 
 	// @interface FlyBuyPickupManager : NSObject
 	[BaseType (typeof(NSObject))]
 	[DisableDefaultCtor]
-	interface FlyBuyPickupManager : ICLLocationManagerDelegate
+	interface FlyBuyPickupManager
 	{
 		// @property (readonly, nonatomic, strong, class) FlyBuyPickupManager * _Nonnull shared;
 		[Static]
@@ -29,7 +29,13 @@ namespace FlyBuy
 		// -(void)configure;
 		[Export ("configure")]
 		void Configure ();
+	}
 
+	// @interface FlyBuyPickup_Swift_340 (FlyBuyPickupManager) <CLLocationManagerDelegate>
+	[Category]
+	[BaseType (typeof(FlyBuyPickupManager))]
+	interface FlyBuyPickupManager_FlyBuyPickup_Swift_340 : ICLLocationManagerDelegate
+	{
 		// -(void)locationManager:(CLLocationManager * _Nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status;
 		[Export ("locationManager:didChangeAuthorizationStatus:")]
 		void LocationManager (CLLocationManager manager, CLAuthorizationStatus status);

@@ -11,9 +11,9 @@ namespace FlyBuy
 		[Field ("FlyBuyPresenceVersionNumber", "__Internal")]
 		double FlyBuyPresenceVersionNumber { get; }
 
-		// extern const unsigned char [] FlyBuyPresenceVersionString;
+		// extern const unsigned char[] FlyBuyPresenceVersionString;
 		[Field ("FlyBuyPresenceVersionString", "__Internal")]
-		NSString FlyBuyPresenceVersionString { get; }
+		byte[] FlyBuyPresenceVersionString { get; }
 	}
 
 	// @interface FlyBuyPresenceManager : NSObject
@@ -66,7 +66,7 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)init:(enum PresenceErrorType)typeIn __attribute__((objc_designated_initializer));
 		[Export ("init:")]
 		[DesignatedInitializer]
-		IntPtr Constructor (PresenceErrorType typeIn);
+		NativeHandle Constructor (PresenceErrorType typeIn);
 
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
 		[Export ("description")]

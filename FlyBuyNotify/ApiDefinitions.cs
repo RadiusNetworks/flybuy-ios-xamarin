@@ -14,9 +14,9 @@ namespace FlyBuy
 		[Field ("FlyBuyNotifyVersionNumber", "__Internal")]
 		double FlyBuyNotifyVersionNumber { get; }
 
-		// extern const unsigned char [] FlyBuyNotifyVersionString;
+		// extern const unsigned char[] FlyBuyNotifyVersionString;
 		[Field ("FlyBuyNotifyVersionString", "__Internal")]
-		NSString FlyBuyNotifyVersionString { get; }
+		byte[] FlyBuyNotifyVersionString { get; }
 	}
 
 	// @interface FlyBuyNotifyManager : NSObject
@@ -49,10 +49,10 @@ namespace FlyBuy
 		bool IsFlyBuyNotifyUserInfo (NSDictionary userInfo);
 	}
 
-	// @interface FlyBuyNotify_Swift_244 (FlyBuyNotifyManager)
+	// @interface FlyBuyNotify_Swift_357 (FlyBuyNotifyManager)
 	[Category]
 	[BaseType (typeof(FlyBuyNotifyManager))]
-	interface FlyBuyNotifyManager_FlyBuyNotify_Swift_244
+	interface FlyBuyNotifyManager_FlyBuyNotify_Swift_357
 	{
 		// -(void)syncWithForce:(BOOL)force callback:(void (^ _Nullable)(NSError * _Nullable))callback;
 		[Export ("syncWithForce:callback:")]
@@ -98,7 +98,7 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)init:(enum NotifyErrorType)typeIn __attribute__((objc_designated_initializer));
 		[Export ("init:")]
 		[DesignatedInitializer]
-		IntPtr Constructor (NotifyErrorType typeIn);
+		NativeHandle Constructor (NotifyErrorType typeIn);
 
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
 		[Export ("description")]
