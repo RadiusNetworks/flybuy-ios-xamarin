@@ -1,6 +1,5 @@
 using System;
 using CoreLocation;
-using FlyBuy;
 using Foundation;
 using ObjCRuntime;
 
@@ -15,7 +14,7 @@ namespace FlyBuy
 
 		// extern const unsigned char[] FlyBuyVersionString;
 		[Field ("FlyBuyVersionString", "__Internal")]
-		byte[] FlyBuyVersionString { get; }
+        NSString FlyBuyVersionString { get; }
 	}
 
 	// @interface AppConfig : NSObject
@@ -56,7 +55,7 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)initWithToken:(NSString * _Nonnull)token __attribute__((objc_designated_initializer));
 		[Export ("initWithToken:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (string token);
+		IntPtr Constructor (string token);
 
 		// -(FlyBuyConfigOptions * _Nonnull)build __attribute__((warn_unused_result("")));
 		[Export ("build")]
@@ -103,7 +102,7 @@ namespace FlyBuy
 		// +(void)setAppInstanceIDUpdatedListenerWithCallback:(void (^ _Nullable)(NSUUID * _Nonnull))callback;
 		[Static]
 		[Export ("setAppInstanceIDUpdatedListenerWithCallback:")]
-		void SetAppInstanceIDUpdatedListenerWithCallback ([NullAllowed] Action<NSUUID> callback);
+		void SetAppInstanceIDUpdatedListenerWithCallback ([NullAllowed] Action<NSUuid> callback);
 
 		// +(void)configure:(NSDictionary<NSString *,id> * _Nonnull)opts __attribute__((deprecated("This method for configuring Flybuy Core has been deprecated. Use FlyBuy.Core.configure(withOptions configOptions: ConfigOptions) instead.")));
 		[Static]
@@ -173,7 +172,7 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)initWithTermsOfService:(BOOL)termsOfService ageVerification:(BOOL)ageVerification __attribute__((objc_designated_initializer));
 		[Export ("initWithTermsOfService:ageVerification:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (bool termsOfService, bool ageVerification);
+		IntPtr Constructor (bool termsOfService, bool ageVerification);
 	}
 
 	// @interface FlyBuyCustomerInfo : NSObject
@@ -204,7 +203,7 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)initWithName:(NSString * _Nonnull)name carType:(NSString * _Nullable)carType carColor:(NSString * _Nullable)carColor licensePlate:(NSString * _Nullable)licensePlate phone:(NSString * _Nullable)phone __attribute__((objc_designated_initializer));
 		[Export ("initWithName:carType:carColor:licensePlate:phone:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (string name, [NullAllowed] string carType, [NullAllowed] string carColor, [NullAllowed] string licensePlate, [NullAllowed] string phone);
+		IntPtr Constructor (string name, [NullAllowed] string carType, [NullAllowed] string carColor, [NullAllowed] string licensePlate, [NullAllowed] string phone);
 	}
 
 	// @interface FlyBuyCustomerManager : NSObject
@@ -361,8 +360,8 @@ namespace FlyBuy
 	// @interface FlyBuyOrder : NSObject
 	[BaseType (typeof(NSObject))]
 	[DisableDefaultCtor]
-	interface FlyBuyOrder
-	{
+	interface FlyBuyOrder : INativeObject
+    {
 		// @property (readonly, nonatomic) NSInteger id;
 		[Export ("id")]
 		nint Id { get; }
@@ -708,8 +707,8 @@ namespace FlyBuy
 		void CreateWithSitePartnerIdentifier (string sitePartnerIdentifier, string orderPartnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
 
 		// -(void)createWithSitePartnerIdentifier:(NSString * _Nonnull)sitePartnerIdentifier orderPartnerIdentifier:(NSString * _Nonnull)orderPartnerIdentifier customerInfo:(FlyBuyCustomerInfo * _Nonnull)customerInfo pickupWindow:(FlyBuyPickupWindow * _Nullable)pickupWindow pickupType:(NSString * _Nullable)pickupType callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback __attribute__((deprecated("This method for creating an order has been deprecated. Use create(siteID, orderOptions) instead.")));
-		[Export ("createWithSitePartnerIdentifier:orderPartnerIdentifier:customerInfo:pickupWindow:pickupType:callback:")]
-		void CreateWithSitePartnerIdentifier (string sitePartnerIdentifier, string orderPartnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, [NullAllowed] string pickupType, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
+		//[Export ("createWithSitePartnerIdentifier:orderPartnerIdentifier:customerInfo:pickupWindow:pickupType:callback:")]
+		//void CreateWithSitePartnerIdentifier (string sitePartnerIdentifier, string orderPartnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, [NullAllowed] string pickupType, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
 
 		// -(void)createWithSitePartnerIdentifier:(NSString * _Nonnull)sitePartnerIdentifier orderPartnerIdentifier:(NSString * _Nonnull)orderPartnerIdentifier customerInfo:(FlyBuyCustomerInfo * _Nonnull)customerInfo state:(NSString * _Nullable)state pickupType:(NSString * _Nullable)pickupType callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback __attribute__((deprecated("This method for creating an order has been deprecated. Use create(siteID, orderOptions) instead.")));
 		[Export ("createWithSitePartnerIdentifier:orderPartnerIdentifier:customerInfo:state:pickupType:callback:")]
@@ -728,8 +727,8 @@ namespace FlyBuy
 		void CreateWithSiteID (nint siteID, string partnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
 
 		// -(void)createWithSiteID:(NSInteger)siteID partnerIdentifier:(NSString * _Nonnull)partnerIdentifier customerInfo:(FlyBuyCustomerInfo * _Nonnull)customerInfo pickupWindow:(FlyBuyPickupWindow * _Nullable)pickupWindow pickupType:(NSString * _Nullable)pickupType callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback __attribute__((deprecated("This method for creating an order has been deprecated. Use create(siteID, orderOptions) instead.")));
-		[Export ("createWithSiteID:partnerIdentifier:customerInfo:pickupWindow:pickupType:callback:")]
-		void CreateWithSiteID (nint siteID, string partnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, [NullAllowed] string pickupType, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
+		//[Export ("createWithSiteID:partnerIdentifier:customerInfo:pickupWindow:pickupType:callback:")]
+		//void CreateWithSiteID (nint siteID, string partnerIdentifier, FlyBuyCustomerInfo customerInfo, [NullAllowed] FlyBuyPickupWindow pickupWindow, [NullAllowed] string pickupType, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
 
 		// -(void)createWithSiteID:(NSInteger)siteID partnerIdentifier:(NSString * _Nonnull)partnerIdentifier customerInfo:(FlyBuyCustomerInfo * _Nonnull)customerInfo state:(NSString * _Nullable)state pickupType:(NSString * _Nullable)pickupType callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback __attribute__((deprecated("This method for creating an order has been deprecated. Use create(siteID, orderOptions) instead.")));
 		[Export ("createWithSiteID:partnerIdentifier:customerInfo:state:pickupType:callback:")]
@@ -882,11 +881,11 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)initWithStart:(NSDate * _Nonnull)start end:(NSDate * _Nonnull)end __attribute__((objc_designated_initializer));
 		[Export ("initWithStart:end:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (NSDate start, NSDate end);
+		IntPtr Constructor (NSDate start, NSDate end);
 
 		// -(instancetype _Nonnull)init:(NSDate * _Nonnull)date;
 		[Export ("init:")]
-		NativeHandle Constructor (NSDate date);
+		IntPtr Constructor (NSDate date);
 
 		// -(NSString * _Nonnull)formattedStringWithLocale:(NSLocale * _Nonnull)locale __attribute__((warn_unused_result("")));
 		[Export ("formattedStringWithLocale:")]
@@ -895,8 +894,8 @@ namespace FlyBuy
 
 	// @interface FlyBuySite : NSObject
 	[BaseType (typeof(NSObject))]
-	interface FlyBuySite
-	{
+	interface FlyBuySite : INativeObject
+    {
 		// @property (readonly, nonatomic) NSInteger id;
 		[Export ("id")]
 		nint Id { get; }

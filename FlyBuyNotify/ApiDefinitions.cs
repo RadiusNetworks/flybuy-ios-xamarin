@@ -16,7 +16,7 @@ namespace FlyBuy
 
 		// extern const unsigned char[] FlyBuyNotifyVersionString;
 		[Field ("FlyBuyNotifyVersionString", "__Internal")]
-		byte[] FlyBuyNotifyVersionString { get; }
+        NSString FlyBuyNotifyVersionString { get; }
 	}
 
 	// @interface FlyBuyNotifyManager : NSObject
@@ -98,7 +98,7 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)init:(enum NotifyErrorType)typeIn __attribute__((objc_designated_initializer));
 		[Export ("init:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (NotifyErrorType typeIn);
+        IntPtr Constructor (NotifyErrorType typeIn);
 
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
 		[Export ("description")]

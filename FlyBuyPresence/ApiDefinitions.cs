@@ -66,7 +66,7 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)init:(enum PresenceErrorType)typeIn __attribute__((objc_designated_initializer));
 		[Export ("init:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (PresenceErrorType typeIn);
+		IntPtr Constructor (PresenceErrorType typeIn);
 
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
 		[Export ("description")]

@@ -114,7 +114,7 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)init:(enum TablesideErrorType)typeIn __attribute__((objc_designated_initializer));
 		[Export ("init:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (TablesideErrorType typeIn);
+		IntPtr Constructor (TablesideErrorType typeIn);
 
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
 		[Export ("description")]
@@ -154,7 +154,7 @@ namespace FlyBuy
 	// @interface TablesideSite : NSObject
 	[BaseType (typeof(NSObject))]
 	[DisableDefaultCtor]
-	interface TablesideSite
+	interface TablesideSite : INativeObject
 	{
 	}
 
