@@ -15,9 +15,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>Radiusnetworks.Flybuy.IOS.sim</PackageId>
-    <PackageVersion>2.4.1</PackageVersion>
+    <PackageVersion>2.7.2.0</PackageVersion>
     <Authors>Radius Networks, Inc</Authors>
-    <Copyright>Copyright (c) 2021 by Radius Networks</Copyright>
+    <Copyright>Copyright (c) 2023 by Radius Networks</Copyright>
     <PackageIconUrl>https://www.radiusnetworks.com/wp-content/uploads/FlyBuyPickup_logo.svg</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/RadiusNetworks/flybuy-ios/blob/master/LICENSE</PackageLicenseUrl>
     <Owners>Radius Networks, Inc</Owners>
@@ -75,9 +75,6 @@ Bug Fixes:
     </ProjectReference>
     <ProjectReference Include="..\FlyBuyPresence\FlyBuyPresence.csproj">
       <Name>FlyBuyPresence</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FlyBuyTableside\FlyBuyTableside.csproj">
-      <Name>FlyBuyTableside</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

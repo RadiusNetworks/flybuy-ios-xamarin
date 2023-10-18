@@ -584,16 +584,6 @@ namespace FlyBuy
 		NSNumber SitePrearrivalSeconds { get; }
 	}
 
-	// @interface FlyBuy_Swift_846 (FlyBuyOrder)
-	[Category]
-	[BaseType (typeof(FlyBuyOrder))]
-	interface FlyBuyOrder_FlyBuy_Swift_846
-	{
-		// @property (readonly, nonatomic) BOOL locationTrackingDeferred;
-		[Export ("locationTrackingDeferred")]
-		bool LocationTrackingDeferred { get; }
-	}
-
 	// @interface FlyBuyOrderEvent : NSObject
 	[BaseType (typeof(NSObject))]
 	[DisableDefaultCtor]
@@ -757,13 +747,6 @@ namespace FlyBuy
 		// -(void)rateOrderWithOrderID:(NSInteger)orderID rating:(NSInteger)rating comments:(NSString * _Nullable)comments callback:(void (^ _Nullable)(FlyBuyOrder * _Nullable, NSError * _Nullable))callback;
 		[Export ("rateOrderWithOrderID:rating:comments:callback:")]
 		void RateOrderWithOrderID (nint orderID, nint rating, [NullAllowed] string comments, [NullAllowed] Action<FlyBuyOrder, NSError> callback);
-	}
-
-	// @interface FlyBuy_Swift_1123 (FlyBuyOrdersManager) <CLLocationManagerDelegate>
-	[Category]
-	[BaseType (typeof(FlyBuyOrdersManager))]
-	interface FlyBuyOrdersManager_FlyBuy_Swift_1123 : ICLLocationManagerDelegate
-	{
 	}
 
 	// @interface FlyBuyOrdersManagerError : NSObject

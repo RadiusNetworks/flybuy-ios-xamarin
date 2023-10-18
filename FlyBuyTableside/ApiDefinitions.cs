@@ -13,7 +13,7 @@ namespace FlyBuy
 
 		// extern const unsigned char[] FlyBuyTablesideVersionString;
 		[Field ("FlyBuyTablesideVersionString", "__Internal")]
-		byte[] FlyBuyTablesideVersionString { get; }
+        NSString FlyBuyTablesideVersionString { get; }
 	}
 
 	// @interface FlyBuyAPIError : NSObject
@@ -86,20 +86,6 @@ namespace FlyBuy
 		// -(NSError * _Nullable)stop __attribute__((warn_unused_result("")));
 		[NullAllowed, Export ("stop")]
 		NSError Stop { get; }
-	}
-
-	// @interface FlyBuyTableside_Swift_453 (FlyBuyTablesideManager)
-	[Category]
-	[BaseType (typeof(FlyBuyTablesideManager))]
-	interface FlyBuyTablesideManager_FlyBuyTableside_Swift_453
-	{
-		// -(void)requestAlwaysAuthorization;
-		[Export ("requestAlwaysAuthorization")]
-		void RequestAlwaysAuthorization ();
-
-		// -(void)requestWhenInUseAuthorization;
-		[Export ("requestWhenInUseAuthorization")]
-		void RequestWhenInUseAuthorization ();
 	}
 
 	// @interface FlyBuyTablesideError : NSObject

@@ -13,7 +13,7 @@ namespace FlyBuy
 
 		// extern const unsigned char[] FlyBuyPresenceVersionString;
 		[Field ("FlyBuyPresenceVersionString", "__Internal")]
-		byte[] FlyBuyPresenceVersionString { get; }
+        NSString FlyBuyPresenceVersionString { get; }
 	}
 
 	// @interface FlyBuyPresenceManager : NSObject

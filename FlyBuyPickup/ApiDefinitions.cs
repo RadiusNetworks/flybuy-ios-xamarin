@@ -13,7 +13,7 @@ namespace FlyBuy
 
 		// extern const unsigned char[] FlyBuyPickupVersionString;
 		[Field ("FlyBuyPickupVersionString", "__Internal")]
-		byte[] FlyBuyPickupVersionString { get; }
+        NSString FlyBuyPickupVersionString { get; }
 	}
 
 	// @interface FlyBuyPickupManager : NSObject
@@ -29,23 +29,5 @@ namespace FlyBuy
 		// -(void)configure;
 		[Export ("configure")]
 		void Configure ();
-	}
-
-	// @interface FlyBuyPickup_Swift_340 (FlyBuyPickupManager) <CLLocationManagerDelegate>
-	[Category]
-	[BaseType (typeof(FlyBuyPickupManager))]
-	interface FlyBuyPickupManager_FlyBuyPickup_Swift_340 : ICLLocationManagerDelegate
-	{
-		// -(void)locationManager:(CLLocationManager * _Nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status;
-		[Export ("locationManager:didChangeAuthorizationStatus:")]
-		void LocationManager (CLLocationManager manager, CLAuthorizationStatus status);
-
-		// -(void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations;
-		[Export ("locationManager:didUpdateLocations:")]
-		void LocationManager (CLLocationManager manager, CLLocation[] locations);
-
-		// -(void)locationManager:(CLLocationManager * _Nonnull)manager didRangeBeacons:(NSArray<CLBeacon *> * _Nonnull)beacons inRegion:(CLBeaconRegion * _Nonnull)region;
-		[Export ("locationManager:didRangeBeacons:inRegion:")]
-		void LocationManager (CLLocationManager manager, CLBeacon[] beacons, CLBeaconRegion region);
 	}
 }
