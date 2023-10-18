@@ -3,10 +3,27 @@ using ObjCRuntime;
 namespace FlyBuy
 {
 	[Native]
+	public enum CustomerManagerErrorType : long
+	{
+		LoadingApiUrl = 0,
+		LoadingCustomer = 1,
+		MissingCustomerConsent = 2,
+		CoreIsNotConfigured = 3
+	}
+
+	[Native]
 	public enum FlyBuyAPIErrorType : long
 	{
 		InvalidResponse = 0,
 		ResponseError = 1
+	}
+
+	[Native]
+	public enum FlybuyLinkType : long
+	{
+		DineIn = 0,
+		Redemption = 1,
+		Other = 2
 	}
 
 	[Native]
@@ -28,5 +45,22 @@ namespace FlyBuy
 		Warning = 3,
 		Error = 4,
 		None = 5
+	}
+
+	[Native]
+	public enum OrdersManagerErrorType : long
+	{
+		LoadingCustomer = 0,
+		LoadingApiUrl = 1,
+		AlreadyFetching = 2,
+		InvalidCustomerState = 3,
+		InvalidOrderState = 4,
+		CoreIsNotConfigured = 5
+	}
+
+	[Native]
+	public enum SitesManagerErrorType : long
+	{
+		SitesManagerErrorTypeCoreIsNotConfigured = 0
 	}
 }

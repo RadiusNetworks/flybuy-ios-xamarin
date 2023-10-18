@@ -6,12 +6,14 @@ namespace FlyBuy
 	public enum NotifyErrorType : long
 	{
 		NoLocationPermission = 0,
-		ReachedTheMaxNumberOfSites = 1,
-		NotifyModuleNotConfigured = 2,
-		CoreIsNotConfigured = 3,
-		NotifyModuleNotEnabled = 4,
-		BeaconRangingNotAvailable = 5,
-		NoBeaconInRange = 6,
-		BeaconRangingDisabledInBackground = 7
+		NotificationPermissionDenied = 1,
+		ReachedTheMaxNumberOfSites = 2,
+		NotifyModuleNotConfigured = 3,
+		CoreIsNotConfigured = 4,
+		NotifyModuleNotEnabled = 5,
+		BeaconRangingNotAvailable = 6,
+		NoBeaconInRange = 7,
+		BeaconRangingDisabledInBackground = 8,
+		FailedToAddNotificationRequest = 9
 	}
 }

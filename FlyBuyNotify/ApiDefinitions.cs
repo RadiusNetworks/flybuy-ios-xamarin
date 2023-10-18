@@ -14,9 +14,9 @@ namespace FlyBuy
 		[Field ("FlyBuyNotifyVersionNumber", "__Internal")]
 		double FlyBuyNotifyVersionNumber { get; }
 
-		// extern const unsigned char [] FlyBuyNotifyVersionString;
+		// extern const unsigned char[] FlyBuyNotifyVersionString;
 		[Field ("FlyBuyNotifyVersionString", "__Internal")]
-		NSString FlyBuyNotifyVersionString { get; }
+        NSString FlyBuyNotifyVersionString { get; }
 	}
 
 	// @interface FlyBuyNotifyManager : NSObject
@@ -49,25 +49,6 @@ namespace FlyBuy
 		bool IsFlyBuyNotifyUserInfo (NSDictionary userInfo);
 	}
 
-	// @interface FlyBuyNotify_Swift_244 (FlyBuyNotifyManager)
-	[Category]
-	[BaseType (typeof(FlyBuyNotifyManager))]
-	interface FlyBuyNotifyManager_FlyBuyNotify_Swift_244
-	{
-		// -(void)syncWithForce:(BOOL)force callback:(void (^ _Nullable)(NSError * _Nullable))callback;
-		[Export ("syncWithForce:callback:")]
-		void SyncWithForce (bool force, [NullAllowed] Action<NSError> callback);
-
-		// -(void)performFetchWithCompletionHandler:(void (^ _Nullable)(UIBackgroundFetchResult))completionHandler;
-		[Export ("performFetchWithCompletionHandler:")]
-		void PerformFetchWithCompletionHandler ([NullAllowed] Action<UIBackgroundFetchResult> completionHandler);
-
-		// -(NSDictionary<NSString *,NSString *> * _Nullable)handleNotification:(UNNotificationResponse * _Nonnull)response __attribute__((warn_unused_result("")));
-		[Export ("handleNotification:")]
-		[return: NullAllowed]
-		NSDictionary<NSString, NSString> HandleNotification (UNNotificationResponse response);
-	}
-
 	// @interface NotificationInfo : NSObject
 	[BaseType (typeof(NSObject), Name = "_TtC12FlyBuyNotify16NotificationInfo")]
 	[DisableDefaultCtor]
@@ -98,7 +79,7 @@ namespace FlyBuy
 		// -(instancetype _Nonnull)init:(enum NotifyErrorType)typeIn __attribute__((objc_designated_initializer));
 		[Export ("init:")]
 		[DesignatedInitializer]
-		IntPtr Constructor (NotifyErrorType typeIn);
+        IntPtr Constructor (NotifyErrorType typeIn);
 
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull description;
 		[Export ("description")]

@@ -11,9 +11,9 @@ namespace FlyBuy
 		[Field ("FlyBuyTablesideVersionNumber", "__Internal")]
 		double FlyBuyTablesideVersionNumber { get; }
 
-		// extern const unsigned char [] FlyBuyTablesideVersionString;
+		// extern const unsigned char[] FlyBuyTablesideVersionString;
 		[Field ("FlyBuyTablesideVersionString", "__Internal")]
-		NSString FlyBuyTablesideVersionString { get; }
+        NSString FlyBuyTablesideVersionString { get; }
 	}
 
 	// @interface FlyBuyAPIError : NSObject
@@ -47,13 +47,17 @@ namespace FlyBuy
 		[Export ("maxPayloadSize")]
 		nint MaxPayloadSize { get; }
 
-		// @property (copy, nonatomic) NSString * _Nullable apiToken;
+		// @property (readonly, copy, nonatomic) NSString * _Nullable apiToken;
 		[NullAllowed, Export ("apiToken")]
-		string ApiToken { get; set; }
+		string ApiToken { get; }
 
-		// @property (copy, nonatomic) NSString * _Nullable kitID;
+		// @property (readonly, copy, nonatomic) NSString * _Nullable kitID;
 		[NullAllowed, Export ("kitID")]
-		string KitID { get; set; }
+		string KitID { get; }
+
+		[Wrap ("WeakDelegate")]
+		[NullAllowed]
+		TablesideSiteMonitorDelegate Delegate { get; set; }
 
 		// @property (nonatomic, strong) id<TablesideSiteMonitorDelegate> _Nullable delegate;
 		[NullAllowed, Export ("delegate", ArgumentSemantic.Strong)]
@@ -82,20 +86,6 @@ namespace FlyBuy
 		// -(NSError * _Nullable)stop __attribute__((warn_unused_result("")));
 		[NullAllowed, Export ("stop")]
 		NSError Stop { get; }
-	}
-
-	// @interface FlyBuyTableside_Swift_271 (FlyBuyTablesideManager)
-	[Category]
-	[BaseType (typeof(FlyBuyTablesideManager))]
-	interface FlyBuyTablesideManager_FlyBuyTableside_Swift_271
-	{
-		// -(void)requestAlwaysAuthorization;
-		[Export ("requestAlwaysAuthorization")]
-		void RequestAlwaysAuthorization ();
-
-		// -(void)requestWhenInUseAuthorization;
-		[Export ("requestWhenInUseAuthorization")]
-		void RequestWhenInUseAuthorization ();
 	}
 
 	// @interface FlyBuyTablesideError : NSObject

@@ -216,22 +216,50 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+
 @class NSString;
 @class CLCircularRegion;
 @class NotificationInfo;
 @class FlyBuySite;
 
+/// Manager for Notify operations
+/// See <a href="https://www.radiusnetworks.com/developers/flybuy/#/">Flybuy Developer Docs</a> for additional details including all setup steps.
 SWIFT_CLASS_NAMED("Manager")
 @interface FlyBuyNotifyManager : NSObject
+/// The shared <code>FlyBuyNotifyManager</code> instance.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlyBuyNotifyManager * _Nonnull shared;)
 + (FlyBuyNotifyManager * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+/// Configure and initialize the Notify module.
+/// In addition to initializing the Flybuy core module you need to initialize the Notify module. Call this method to setup Flybuy Notify and enable campaigns in your app. This will setup the notifications and automatically sync with the settings created in the Flybuy portal.
+/// See <a href="https://www.radiusnetworks.com/developers/flybuy/#/">Flybuy Developer Docs</a> for additional details including all setup steps.
+/// Example:
+/// \code
+/// func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+///   // Configure Core
+///   FlyBuy.Core.configure(["token": "TOKEN_HERE"])
+///   // Enables Notify and uses Background Tasks
+///   // The optional callback is performed upon completion of
+///   // a campaign sync triggered by a background task.
+///   FlyBuyNotify.Manager.shared.configure(bgTaskIdentifier: "your.unique.background.app.refresh.task.identifier")
+///   return true
+/// }
+///
+/// \endcodenote:
+/// If opting to not support the Background Tasks framework for updating campaign content, simply call configure() without any arguments.
+/// \param bgTaskIdentifier Unique string identifier for the background task. Identifier must be added to the app’s info.plist under the “BGTaskSchedulerPermittedIdentifiers” key.
+///
+/// \param bgSyncCallback Called upon completion of a campaign sync triggered by a background task. Optional
+///
 - (void)configureWithBgTaskIdentifier:(NSString * _Nullable)bgTaskIdentifier bgSyncCallback:(void (^ _Nullable)(NSError * _Nullable))bgSyncCallback;
+/// Notify V1 method for creating notifications for sites within a region using the provided notificationInfo.
 - (void)createForSitesInRegion:(CLCircularRegion * _Nonnull)region notification:(NotificationInfo * _Nonnull)notification callback:(void (^ _Nonnull)(NSArray<FlyBuySite *> * _Nullable, NSError * _Nullable))callback SWIFT_DEPRECATED_MSG("This method for using Notify has been deprecated.");
+/// Notify V1 method for creating notifications for sites using the provided notificationInfo.
 - (void)createForSites:(NSArray<FlyBuySite *> * _Nonnull)sites notification:(NotificationInfo * _Nonnull)notification callback:(void (^ _Nonnull)(NSError * _Nullable))callback SWIFT_DEPRECATED_MSG("This method for using Notify has been deprecated.");
-/// clears all notifications
+/// Notify V1 method for clearing notifications.
 /// \param callback will get called on completion of any errors encountered.
 ///
 - (void)clearWithCallback:(void (^ _Nonnull)(NSError * _Nullable))callback SWIFT_DEPRECATED_MSG("This method for using Notify has been deprecated.");
+/// Notify V1 method for checking if a remote notification is from a Notify notification.
 - (BOOL)isFlyBuyNotifyUserInfo:(NSDictionary * _Nonnull)userInfo SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("This method for using Notify has been deprecated.");
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -242,12 +270,33 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) FlyBuyNotify
 @class UNNotificationResponse;
 
 @interface FlyBuyNotifyManager (SWIFT_EXTENSION(FlyBuyNotify))
+/// Sync Notify campaign data.
+/// The sync method is provided as a development tool, in production applications it should not be called. The SDK will automatically sync data with the Flybuy portal. However, the schedule used by the SDK may not be conducive to testing and development iterations.
+/// Important: The force parameter will destroy all local notify data and re-fetch any data.
+/// \param force When set to true, SDK will destroy all local notify data and re-fetch any data upon sync
+///
+/// \param callback Called when the campaign sync is successful or any error encountered.
+///
 - (void)syncWithForce:(BOOL)force callback:(void (^ _Nullable)(NSError * _Nullable))callback;
+/// Supports Notify campaign updates using the deprecated Background Fetch framework.
+/// This is intended for supporting an app target of iOS 12 or prior. If app target is iOS 13 or above, it is highly recommended to omit this and use the new iOS Background Task for updating campaigns by passing a background task identifier to the configure() call.
+/// important:
+/// Adding a background task identifier to the app’s info.plist will disable the deprecated Background Fetch framework. In case the app is already using Background Fetch for any other background fetch tasks, this key should NOT be added to the app’s info.plist as adding it will cause iOS to no longer trigger the application(_:performFetchWithCompletionHandler:) callback.
+/// Example:
+/// \code
+/// // In the AppDelegate
+/// func application(_ application: UIApplication, performFetchWithCompletionHandler  completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+///   FlyBuyNotify.Manager.shared.performFetchWithCompletionHandler(completionHandler)
+/// }
+///
+/// \endcode\param completionHandler The completion handler that is passed to the appdelegate by iOS.
+///
 - (void)performFetchWithCompletionHandler:(void (^ _Nullable)(UIBackgroundFetchResult))completionHandler;
 - (NSDictionary<NSString *, NSString *> * _Nullable)handleNotification:(UNNotificationResponse * _Nonnull)response SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
+/// Data model for notification info provided to Notify V1.
 SWIFT_CLASS("_TtC12FlyBuyNotify16NotificationInfo")
 @interface NotificationInfo : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull title;
@@ -259,15 +308,19 @@ SWIFT_CLASS("_TtC12FlyBuyNotify16NotificationInfo")
 
 enum NotifyErrorType : NSInteger;
 
+/// Error that may be returned from FlyBuyNotifyManager methods.
 SWIFT_CLASS_NAMED("NotifyError")
 @interface FlyBuyNotifyError : NSObject
+/// Specifies the error type and contains a description of the error.
 @property (nonatomic, readonly) enum NotifyErrorType type;
 - (nonnull instancetype)init:(enum NotifyErrorType)typeIn OBJC_DESIGNATED_INITIALIZER;
+/// Returns the string describing the error type.
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// The type that may be associated with a NotifyError.
 typedef SWIFT_ENUM(NSInteger, NotifyErrorType, open) {
   NotifyErrorTypeNoLocationPermission = 0,
   NotifyErrorTypeReachedTheMaxNumberOfSites = 1,
